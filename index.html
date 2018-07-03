@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linking Text and Images</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1 id="myHeader" align="center">Linking Texts and Images</h1>
+Type in some text:<br>
+<input type="text" name="textInputs" id="userInput" style="width: 400px;">
+<input type="submit" id="submit" onclick="process()" value="Submit">
+
+<div id = "screen" style = "background-color: lightblue;">
+    <p id = "text"></p>
+    <script>
+        function process() {
+            var input = document.getElementById("userInput").value;
+            console.log(input);
+            display();
+
+        }
+
+        function display() {
+
+            d3.json("data.json", function(data){
+            console.log(data);
+            for (var key in data){
+                 var img = document.createElement("img");
+                 img.id = key;
+                 img.src = data[key];
+                 var src = document.getElementById("text");
+
+                 var word = document.createElement("h2");
+                 word.innerHTML = key;
+
+                 src.appendChild(word);
+                 src.appendChild(img);
+
+                 console.log(key);
+                 console.log(data[key]);
+            }
+        });
+        }
+
+    </script>
+</div>
+</body>
+</html>
